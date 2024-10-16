@@ -1,41 +1,43 @@
 package com.nerazim.emtest.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.nerazim.emtest.DataApi
+import com.nerazim.emtest.data.ApiHelper
+import com.nerazim.emtest.data.DataRepositoryImpl
+import com.nerazim.emtest.data.RetrofitBuilder
+import com.nerazim.emtest.domain.DataRepository
 import com.nerazim.emtest.ui.theme.EMTestTheme
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+
+        val dataApi = RetrofitBuilder().dataApi
+        val apiHelper = ApiHelper(dataApi)
+        val repository = DataRepositoryImpl(apiHelper)
+        CoroutineScope(Dispatchers.IO).launch {
+            val data = repository.getData(applicationContext)
+            Log.d("data", data.toString())
+        }
+
         setContent {
             EMTestTheme {
                 //переменная состояния, отслеживающая текущий экран

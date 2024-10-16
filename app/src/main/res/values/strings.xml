@@ -5,4 +5,5 @@
     <string name="replies">Отклики</string>
     <string name="messages">Сообщения</string>
     <string name="profile">Профиль</string>
+    <string name="file_name">мок json.json</string>
 </resources>

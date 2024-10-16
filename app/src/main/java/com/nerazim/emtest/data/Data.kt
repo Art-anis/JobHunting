@@ -1,6 +1,6 @@
-package com.nerazim.emtest
+package com.nerazim.emtest.data
 
-//общий JSON-объект
+//общий объек, получаемый из JSON
 data class Data(
     val offers: List<Offer> = listOf(), //список рекомендаций
     val vacancies: List<Vacancy> = listOf() //список вакансий

@@ -1,4 +1,4 @@
-package com.nerazim.emtest
+package com.nerazim.emtest.data
 
 import retrofit2.http.GET
 
