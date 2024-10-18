@@ -7,4 +7,5 @@
     <string name="profile">Профиль</string>
     <string name="file_name">мок json.json</string>
     <string name="search_placeholder">Должность, ключевые слова</string>
+    <string name="advanced_search_placeholder">Должность по подходящим вакансиям</string>
 </resources>
