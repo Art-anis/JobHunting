@@ -1,8 +1,13 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.bottombar
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import com.nerazim.emtest.R
+import com.nerazim.emtest.presentation.screens.FavoritesScreen
+import com.nerazim.emtest.presentation.screens.MessagesScreen
+import com.nerazim.emtest.presentation.screens.ProfileScreen
+import com.nerazim.emtest.presentation.screens.RepliesScreen
+import com.nerazim.emtest.presentation.screens.SearchScreen
 
 //список возможных назначений в навигации
 sealed class BottomBarDestination(
@@ -23,7 +28,8 @@ sealed class BottomBarDestination(
     data object Favorite: BottomBarDestination(
         active = R.drawable.favorite_active,
         inactive = R.drawable.favorite_inactive,
-        route = "Избранное"
+        route = "Избранное",
+        screen = { FavoritesScreen() }
     )
 
     //отклики

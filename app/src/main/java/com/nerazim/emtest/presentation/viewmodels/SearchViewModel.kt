@@ -1,4 +1,4 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -48,10 +48,12 @@ class SearchViewModel(
     fun addToFavorites(vacancy: Vacancy) {
         addToFavoritesUseCase.execute(vacancy)
         refreshVacancies()
+        //bbvm.refreshFavoriteNumber()
     }
 
     fun removeFromFavorites(vacancy: Vacancy) {
         removeFromFavoritesUseCase.execute(vacancy)
         refreshVacancies()
+        //bbvm.refreshFavoriteNumber()
     }
 }

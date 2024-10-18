@@ -31,4 +31,23 @@ class DataRepositoryImpl(private val apiHelper: ApiHelper): DataRepository {
         return data.vacancies
     }
 
+    override fun getFavorites(): List<Vacancy> {
+        return data.vacancies.filter { it.isFavorite == true }
+    }
+
+    override fun getFavoritesNumber(): Int {
+        data.favoriteNumber = getFavorites().size
+        return data.favoriteNumber
+    }
+
+    override fun addFavorite(vacancy: Vacancy) {
+        data.vacancies.find { it == vacancy }?.isFavorite = true
+        data.favoriteNumber += 1
+    }
+
+    override fun removeFavorite(vacancy: Vacancy) {
+        data.vacancies.find { it == vacancy }?.isFavorite = false
+        data.favoriteNumber -= 1
+    }
+
 }

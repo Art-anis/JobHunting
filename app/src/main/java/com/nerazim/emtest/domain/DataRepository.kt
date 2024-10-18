@@ -15,4 +15,12 @@ interface DataRepository {
 
     //выделение списка вакансий
     fun getVacancies(): List<Vacancy>
+
+    fun getFavorites(): List<Vacancy>
+
+    fun getFavoritesNumber(): Int
+
+    fun addFavorite(vacancy: Vacancy)
+
+    fun removeFavorite(vacancy: Vacancy)
 }

@@ -1,4 +1,4 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,10 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun RepliesScreen() {
+fun ProfileScreen() {
     Surface(Modifier.fillMaxSize()) {
         Box(contentAlignment = Alignment.Center) {
-            Text("Просмотр откликов пока недоступен!")
+            Text("Вкладка профиля пока недоступна!")
         }
     }
 }

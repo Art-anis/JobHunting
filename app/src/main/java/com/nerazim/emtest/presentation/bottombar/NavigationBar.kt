@@ -1,4 +1,4 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.bottombar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -7,15 +7,24 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Tab
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.nerazim.emtest.R
+import com.nerazim.emtest.presentation.viewmodels.FavoriteNumberViewModel
+import com.nerazim.emtest.presentation.viewmodels.ViewModelFactory
 
 //нижний бар, он же навигация
 @Composable
@@ -27,6 +36,7 @@ fun JobBottomBar(
     Surface(
         Modifier.fillMaxWidth()
     ) {
+
         //ряд, на котором размещаются все иконки
         Row(
             Modifier.selectableGroup(), //это группа предметов, из которых можно выбрать один
@@ -63,7 +73,28 @@ fun JobBottomBarItem(
             role = Tab),
         horizontalAlignment = Alignment.CenterHorizontally //выравнивание по центру
     ) {
-        Image(painter = icon, contentDescription = text) //сама иконка (не Icon, потому что иначе они черно-белые)
+        if (text == stringResource(R.string.favorite)) {
+            val viewModel: FavoriteNumberViewModel = viewModel(factory = ViewModelFactory.Factory)
+            val favoriteNumber by viewModel.getFavoritesNumber().observeAsState()
+
+            BadgedBox(badge = {
+                favoriteNumber?.let {
+                    if (it > 0) {
+                        Badge(
+                            containerColor = Color(0xFFFF0000),
+                            contentColor = Color.White
+                        ) {
+                            Text("$it")
+                        }
+                    }
+                }
+            }) {
+                Image(painter = icon, contentDescription = text) //сама иконка (не Icon, потому что иначе они черно-белые)
+            }
+        }
+        else {
+            Image(painter = icon, contentDescription = text) //сама иконка (не Icon, потому что иначе они черно-белые)
+        }
         //подпись, меняет цвет в зависимости от того, выбран ли этот экран
         Text(
             text = text,

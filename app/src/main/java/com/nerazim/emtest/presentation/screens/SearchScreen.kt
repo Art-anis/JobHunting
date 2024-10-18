@@ -1,4 +1,4 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +26,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nerazim.emtest.R
+import com.nerazim.emtest.presentation.cards.OfferComponent
+import com.nerazim.emtest.presentation.cards.VacancyComponent
+import com.nerazim.emtest.presentation.viewmodels.ViewModelFactory
+import com.nerazim.emtest.presentation.viewmodels.SearchViewModel
 
 @Composable
 fun SearchScreen() {

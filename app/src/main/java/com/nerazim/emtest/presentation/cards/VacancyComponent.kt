@@ -1,4 +1,4 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.cards
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -13,22 +13,24 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nerazim.emtest.R
 import com.nerazim.emtest.data.Vacancy
+import com.nerazim.emtest.presentation.viewmodels.FavoriteNumberViewModel
+import com.nerazim.emtest.presentation.viewmodels.ViewModelFactory
 
 @Composable
 fun VacancyComponent(
     vacancy: Vacancy,
-    addToFavorites: (Vacancy) -> Unit,
+    addToFavorites: (Vacancy) -> Unit = {},
     removeFromFavorites: (Vacancy) -> Unit
 ) {
+    val favoriteNumberViewModel: FavoriteNumberViewModel = viewModel(factory = ViewModelFactory.Factory)
+
     Surface(
         color = Color(0xFF222325),
         modifier = Modifier
@@ -103,8 +105,6 @@ fun VacancyComponent(
                 }
             }
 
-            val isFavorite by remember { mutableStateOf(vacancy.isFavorite ?: false) }
-
             Image(
                 modifier = Modifier
                     .padding(end = 16.dp)
@@ -115,6 +115,7 @@ fun VacancyComponent(
                         else {
                             removeFromFavorites(vacancy)
                         }
+                        favoriteNumberViewModel.refreshFavoritesNumber()
                     },
                 painter = painterResource(if (vacancy.isFavorite == true) R.drawable.favorite_active else R.drawable.favorite_inactive),
                 contentDescription = null

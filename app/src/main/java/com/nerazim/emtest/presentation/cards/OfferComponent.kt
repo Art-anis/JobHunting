@@ -1,4 +1,4 @@
-package com.nerazim.emtest.presentation
+package com.nerazim.emtest.presentation.cards
 
 import android.content.Intent
 import android.net.Uri
