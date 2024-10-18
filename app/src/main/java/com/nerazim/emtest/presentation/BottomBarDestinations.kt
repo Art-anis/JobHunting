@@ -15,7 +15,8 @@ sealed class BottomBarDestination(
     data object Search: BottomBarDestination(
         active = R.drawable.search_active,
         inactive = R.drawable.search_inactive,
-        route = "Поиск"
+        route = "Поиск",
+        screen = { SearchScreen() }
     )
 
     //избранное
@@ -29,20 +30,23 @@ sealed class BottomBarDestination(
     data object Replies: BottomBarDestination(
         active = R.drawable.replies_active,
         inactive = R.drawable.replies_inactive,
-        route = "Отклики"
+        route = "Отклики",
+        screen = { RepliesScreen() }
     )
 
     //сообщения
     data object Messages: BottomBarDestination(
         active = R.drawable.messages_active,
         inactive = R.drawable.messages_inactive,
-        route = "Сообщения"
+        route = "Сообщения",
+        screen = { MessagesScreen() }
     )
 
     //профиль
     data object Profile: BottomBarDestination(
         active = R.drawable.profile_active,
         inactive = R.drawable.profile_inactive,
-        route = "Профиль"
+        route = "Профиль",
+        screen = { ProfileScreen() }
     )
 }

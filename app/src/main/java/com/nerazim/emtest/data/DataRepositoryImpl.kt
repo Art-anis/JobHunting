@@ -7,8 +7,10 @@ import kotlinx.coroutines.coroutineScope
 
 class DataRepositoryImpl(private val apiHelper: ApiHelper): DataRepository {
 
-    override suspend fun getData(context: Context): Data {
-        val data: Data = coroutineScope {
+    var data: Data = Data()
+
+    override suspend fun loadData(context: Context) {
+        data = coroutineScope {
             //пытаемся загрузить данные из API
             try {
                 apiHelper.getData()
@@ -19,15 +21,14 @@ class DataRepositoryImpl(private val apiHelper: ApiHelper): DataRepository {
                 Gson().fromJson(json, Data::class.java)
             }
         }
-        return data
     }
 
     override fun getOffers(): List<Offer> {
-        TODO("Not yet implemented")
+        return data.offers
     }
 
     override fun getVacancies(): List<Vacancy> {
-        TODO("Not yet implemented")
+        return data.vacancies
     }
 
 }

@@ -1,6 +1,6 @@
 package com.nerazim.emtest.data
 
-//общий объек, получаемый из JSON
+//общий объект, получаемый из JSON
 data class Data(
     val offers: List<Offer> = listOf(), //список рекомендаций
     val vacancies: List<Vacancy> = listOf() //список вакансий
@@ -8,44 +8,50 @@ data class Data(
 
 //рекомендации
 data class Offer(
-    val id: String, //идентификатор
-    val title: String, //название
-    val link: String //ссылка
+    val id: String? = null, //идентификатор
+    val title: String? = null, //название
+    val button: OfferButton? = null, //кнопка
+    val link: String? = null //ссылка
+)
+
+//кнопка в блоке рекомендации
+data class OfferButton(
+    val text: String
 )
 
 //вакансия
 data class Vacancy(
-    val id: String, //идентификатор
-    val lookingNumber: Int, //сколько людей смотрит вакансию
-    val title: String, //название
-    val address: Address, //адрес компании
-    val company: String, //название компании
-    val experience: Experience, //опыт работы
-    val publishedDate: String, //дата публикации
-    val isFavorite: Boolean, //добавлена ли вакансия с избранное
-    val salary: Salary, //зарплата
-    val schedules: List<String>, //варианты занятости
+    val id: String? = null, //идентификатор
+    val lookingNumber: Int? = null, //сколько людей смотрит вакансию
+    val title: String? = null, //название
+    val address: Address? = null, //адрес компании
+    val company: String? = null, //название компании
+    val experience: Experience? = null, //опыт работы
+    val publishedDate: String? = null, //дата публикации
+    var isFavorite: Boolean? = null, //добавлена ли вакансия с избранное
+    val salary: Salary? = null, //зарплата
+    val schedules: List<String> = listOf(), //варианты занятости
     val appliedNumber: Int? = null, //число откликнувшихся
     val description: String? = null, //описание вакансии
-    val responsibilities: String, //ответственности
-    val questions: List<String> //список вопросов
+    val responsibilities: String? = null, //ответственности
+    val questions: List<String> = listOf() //список вопросов
 )
 
 //адрес компании
 data class Address(
-    val town: String, //город
-    val street: String, //улица
-    val house: String //дом
+    val town: String? = null, //город
+    val street: String? = null, //улица
+    val house: String? = null //дом
 )
 
 //опыт работы
 data class Experience(
-    val previewText: String, //кратко об опыте
-    val text: String //полная строка
+    val previewText: String? = null, //кратко об опыте
+    val text: String? = null //полная строка
 )
 
 //зарплата
 data class Salary(
     val short: String? = null, //кратко о зарплате
-    val full: String //полная строка
+    val full: String? = null //полная строка
 )
